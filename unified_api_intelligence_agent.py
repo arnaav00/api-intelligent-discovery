@@ -17,8 +17,13 @@ agent_vulnerability_counts = {}
 # NVD Functions
 def search_latest_cves():
     """Search for latest CVE-2025 vulnerabilities"""
+    # Get today's date in the required format
+    today = datetime.now().strftime("%Y-%m-%d")
+    start_date = f"{today}T00:00:00.000"
+    end_date = f"{today}T23:59:59.000"
+    
     # NVD API endpoint
-    base_url = "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=API&pubStartDate=2025-09-18T00:00:00.000&pubEndDate=2025-09-18T23:59:59.000"
+    base_url = f"https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=API&pubStartDate={start_date}&pubEndDate={end_date}"
 
     try:
         response = requests.get(base_url, timeout=30)
@@ -44,8 +49,11 @@ def fetch_api_advisories():
     return filtered
 
 # HackerOne Functions
+# Generate dynamic dates for one week interval (today and 7 days ago)
+today = datetime.now().strftime("%Y-%m-%d")
+week_ago = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
 hacktivity_url = (
-    "https://hackerone.com/hacktivity/overview?queryString=api+AND+disclosed%3Atrue+AND+disclosed_at%3A%3E%3D2025-09-15+AND+disclosed_at%3A%3C%3D2025-09-22&sortField=disclosed_at&sortDirection=DESC&pageIndex=0"
+    f"https://hackerone.com/hacktivity/overview?queryString=api+AND+disclosed%3Atrue+AND+disclosed_at%3A%3E%3D{week_ago}+AND+disclosed_at%3A%3C%3D{today}&sortField=disclosed_at&sortDirection=DESC&pageIndex=0"
 )
 
 page_loading_timeout = 10

@@ -14,7 +14,7 @@ The system acts like a team of specialized security researchers, each monitoring
 - **HackerOne** - Real-world vulnerability reports from ethical hackers
 - **VulDB** - Comprehensive vulnerability database
 - **Zero Day Initiative** - Advanced threat intelligence
-- **API Security** - Specialized API security news and advisories
+- **Apisecurity.io** - Specialized API security news and advisories
 
 ### **Test Generation**
 - Automatically identifies which vulnerabilities are relevant to APIs or MCPs
@@ -65,17 +65,12 @@ Generated tests can be deployed to production. We don't trust AI to validate the
    - `api_test_agent.py` - API test generator
    - `mcp_test_agent.py` - MCP test generator
 
-   NOTE: The application is not as robust for MCPs as it is for APIs. The MCP implementation was only for a PoC and can only fetch from NVD and Git Advisory.
+   NOTE: The application is not as robust for MCPs as it is for APIs. The MCP implementation was only for a PoC and can only fetch from NVD and Git Advisory for now.
 
 3. **Data Storage** (ChromaDB)
    - Vector database for storing vulnerability information
    - Enables semantic search and similarity matching
    - Persistent storage across sessions
-
-4. **Knowledge Sources**
-   - CAPEC attack patterns
-   - CWE vulnerability classifications
-   - MITRE ATT&CK framework data
 
 ### **Technology Stack**
 - **Strands Framework** - Powers the AI agents
@@ -118,11 +113,8 @@ Generated tests can be deployed to production. We don't trust AI to validate the
 3. **Start gathering** - Click "Start Intelligence Gathering" to begin data collection
 4. **Generate tests** - After data collection, select a source and click "Generate Tests"
 5. **Review results** - Examine the generated test categories and code
-6. **Deploy** - Use the generated tests in your security testing workflow
-
-## Usage Examples
-
-### Example 1: API Security Assessment
+   
+## Usage Example
 ```
 1. Set mode to "API"
 2. Select sources: NVD, GitHub Advisory, HackerOne
